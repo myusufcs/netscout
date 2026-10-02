@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Laporan inventaris = peta jaringan. Jangan pernah di-commit.
+reports/
+netscout-*.txt
+netscout-*.md
+netscout-*.json
+netscout-*.csv
+netscout-*.svg
+netscout-*.dot
+
+*.log
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ "3.10", "3.11", "3.12", "3.13" ]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Siapkan tool sistem
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq iputils-ping
+          ping -c 1 -W 1 127.0.0.1 >/dev/null && echo "ICMP lokal OK"
+
+      - name: Compile check
+        run: python3 -m compileall -q netscout
+
+      - name: Jalankan test
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Demo pemindaian lokal
+        run: |
+          set -e
+          python3 -m netscout scan 127.0.0.1 --no-snmp --ports 22 \
+            --out reports --format json,svg,dot --quiet || true
+          ls -la reports
+          python3 - <<'PY'
+          import json, glob
+          data = json.load(open(glob.glob('reports/netscout-*.json')[0]))
+          assert data['scanned'] == 1, data['scanned']
+          assert any(f.endswith('.svg') for f in glob.glob('reports/*')), 'SVG tidak dibuat'
+          print('demo OK:', data['summary'])
+          PY
