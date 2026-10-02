@@ -6,7 +6,7 @@ MAC/vendor dari tabel ARP, lalu inventaris + **diagram topologi**.
 Tidak ada dependensi: **SNMPv2c-nya ditulis dari nol** (encoder/decoder BER/ASN.1) dan
 diagram SVG-nya digambar sendiri — tanpa `pysnmp`, tanpa `graphviz`.
 
-[![CI](https://github.com/nullbyte12007/netscout/actions/workflows/ci.yml/badge.svg)](https://github.com/nullbyte12007/netscout/actions/workflows/ci.yml)
+[![CI](https://github.com/myusufcs/netscout/actions/workflows/ci.yml/badge.svg)](https://github.com/myusufcs/netscout/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Zero deps](https://img.shields.io/badge/dependencies-none-success)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -56,7 +56,7 @@ Hasilnya ditulis ke `--out` sebagai **teks + Markdown + JSON + CSV**, plus:
 Zero dependency — cukup standard library Python 3.10+ (`ping` dari sistem untuk ICMP).
 
 ```bash
-git clone https://github.com/nullbyte12007/netscout
+git clone https://github.com/myusufcs/netscout
 cd netscout
 
 python3 -m netscout scan 192.168.1.0/24                          # seluruh subnet
